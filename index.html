@@ -123,6 +123,35 @@
     #hardware,#demo,#app{scroll-margin-top:84px}
     @media(max-width:900px){.media-grid{grid-template-columns:1fr 1fr}.screen-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:600px){.media-grid,.screen-grid{grid-template-columns:1fr}.hero-photo{min-height:320px}.media-card .media-slot{min-height:225px}}
+
+    /* APP SLIDESHOW: single large screenshot, labeled arrows, and timed progress */
+    .app-slideshow{width:100%;max-width:1090px;margin:0 auto;border:1px solid #5b2a32;border-radius:23px;background:linear-gradient(155deg,#1b1114,#0b0b0b);padding:24px;box-shadow:0 22px 72px #0006;outline-offset:5px}
+    .slideshow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#efb1b8;font-size:11px;font-weight:800;letter-spacing:.14em}
+    #slide-count{color:#fff;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+    .slideshow-stage{position:relative}
+    .showcase-slide{display:none}
+    .showcase-slide.is-active{display:block;animation:showcaseIn .28s ease}
+    .showcase-image{width:100%;aspect-ratio:16/9;max-height:590px;border:1px solid #563036;border-radius:15px;background:#110c0d}
+    .showcase-image img{object-fit:contain;background:#0c0c0c}
+    .showcase-description{min-height:105px;padding:18px 2px 12px}
+    .slide-label{color:#ff5965;font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:850}
+    .showcase-description h3{font-size:22px;letter-spacing:-.025em;margin:5px 0}
+    .showcase-description p{font-size:14px;color:#c3b5b7;line-height:1.6;margin:0}
+    .slideshow-controls{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #472b30;padding-top:16px}
+    .slide-arrow{cursor:pointer;display:flex;align-items:center;gap:12px;min-width:180px;padding:10px 14px;text-align:left;border:1px solid #7b3640;background:#221518;border-radius:12px;color:#f7e6e9;transition:background .2s,border-color .2s}
+    .slide-arrow:hover{background:#401b23;border-color:#ff303d}
+    .slide-arrow>span[aria-hidden]{font-size:27px;color:#ff4a58}
+    .arrow-copy{display:grid;gap:4px}.arrow-copy small{color:#b9a0a5;letter-spacing:.14em;font-size:9px;font-weight:800}.arrow-copy strong{font-size:13px}
+    .slide-arrow-next{text-align:right;justify-content:end}
+    .slide-indicators{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
+    .slide-dot{cursor:pointer;width:11px;height:11px;border-radius:50%;border:1px solid #93404b;background:#4d2a30;padding:0;transition:width .2s,background .2s}
+    .slide-dot.is-active{width:28px;border-radius:10px;background:#ff303d;border-color:#ff303d}
+    .slide-progress{height:3px;overflow:hidden;background:#42272c;border-radius:8px;margin-top:17px}
+    #slide-progress-fill{height:100%;width:0;background:#ff303d}
+    .slideshow-hint{text-align:center;color:#9d858a;font-size:11px;margin:12px 0 0}
+    @keyframes showcaseIn{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:700px){.app-slideshow{padding:14px}.showcase-image{aspect-ratio:4/3}.showcase-description{min-height:120px}.slide-arrow{min-width:0;padding:9px;gap:6px}.arrow-copy strong{font-size:11px}.slide-arrow>span[aria-hidden]{font-size:20px}.slide-indicators{gap:5px}.slide-dot{width:8px;height:8px}.slide-dot.is-active{width:18px}}
+    @media(prefers-reduced-motion:reduce){.showcase-slide.is-active{animation:none}.slide-dot,.slide-arrow{transition:none}}
   </style>
 </head>
 <body>
@@ -186,13 +215,48 @@
     <section id="app">
       <div class="wrap">
         <div class="section-top"><div><span class="eyebrow">The control app</span><h2>The intelligence behind every session.</h2></div><p class="section-text">More than a hit counter: game modes, live feedback, device management, and calibration in one place.</p></div>
-        <div class="screen-grid">
-          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">▦</span><strong>Dashboard</strong><small>assets/screenshots/dashboard.png</small></div><img src="assets/screenshots/dashboard.png" alt="Scorpion Defense app dashboard screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Your command center</h3><p>Start a session and see your system at a glance.</p></div></article>
-          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◷</span><strong>Live session</strong><small>assets/screenshots/live-session.png</small></div><img src="assets/screenshots/live-session.png" alt="Live session statistics screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Live feedback</h3><p>Keep an eye on shots, hits, and session timing.</p></div></article>
-          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◎</span><strong>Interactive mode</strong><small>assets/screenshots/interactive.png</small></div><img src="assets/screenshots/interactive.png" alt="Interactive training mode screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Choose your challenge</h3><p>Configure interactive drills with connected targets.</p></div></article>
-          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">⌁</span><strong>Devices</strong><small>assets/screenshots/devices.png</small></div><img src="assets/screenshots/devices.png" alt="Connected devices management screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Manage your targets</h3><p>See connected targets and their status.</p></div></article>
-          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">↗</span><strong>Session stats</strong><small>assets/screenshots/statistics.png</small></div><img src="assets/screenshots/statistics.png" alt="Training statistics screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Review performance</h3><p>Look back at completed sessions and results.</p></div></article>
-          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">☼</span><strong>Calibration</strong><small>assets/screenshots/calibration.png</small></div><img src="assets/screenshots/calibration.png" alt="Target calibration controls screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Fine-tune detection</h3><p>Adjust for your training environment.</p></div></article>
+        <div class="app-slideshow" id="app-slideshow" aria-roledescription="carousel" aria-label="Scorpion Defense app screenshots" tabindex="0">
+          <div class="slideshow-top"><span class="slide-kicker">APP WALKTHROUGH</span><span id="slide-count" aria-live="polite">01 / 06</span></div>
+          <div class="slideshow-stage">
+            <article class="showcase-slide is-active" data-slide="0" aria-hidden="false">
+              <div class="showcase-image media-slot"><div class="slot-inner"><span class="slot-icon">▦</span><strong>Dashboard</strong><small>assets/screenshots/dashboard.png</small></div><img src="assets/screenshots/dashboard.png" alt="Scorpion Defense dashboard screenshot" fetchpriority="high" onerror="this.remove()"></div>
+              <div class="showcase-description"><span class="slide-label">Dashboard</span><h3>Your command center</h3><p>Start a session and see your system at a glance.</p></div>
+            </article>
+            <article class="showcase-slide" data-slide="1" aria-hidden="true" inert>
+              <div class="showcase-image media-slot"><div class="slot-inner"><span class="slot-icon">◷</span><strong>Live Session</strong><small>assets/screenshots/live-session.png</small></div><img src="assets/screenshots/live-session.png" alt="Scorpion Defense live session screenshot" loading="lazy" onerror="this.remove()"></div>
+              <div class="showcase-description"><span class="slide-label">Live Session</span><h3>Live feedback</h3><p>Keep an eye on shots, hits, and session timing.</p></div>
+            </article>
+            <article class="showcase-slide" data-slide="2" aria-hidden="true" inert>
+              <div class="showcase-image media-slot"><div class="slot-inner"><span class="slot-icon">◎</span><strong>Interactive Mode</strong><small>assets/screenshots/interactive.png</small></div><img src="assets/screenshots/interactive.png" alt="Scorpion Defense interactive mode screenshot" loading="lazy" onerror="this.remove()"></div>
+              <div class="showcase-description"><span class="slide-label">Interactive Mode</span><h3>Choose your challenge</h3><p>Configure interactive drills with connected targets.</p></div>
+            </article>
+            <article class="showcase-slide" data-slide="3" aria-hidden="true" inert>
+              <div class="showcase-image media-slot"><div class="slot-inner"><span class="slot-icon">⌁</span><strong>Connected Devices</strong><small>assets/screenshots/devices.png</small></div><img src="assets/screenshots/devices.png" alt="Scorpion Defense connected devices screenshot" loading="lazy" onerror="this.remove()"></div>
+              <div class="showcase-description"><span class="slide-label">Connected Devices</span><h3>Manage your targets</h3><p>See connected targets and their status.</p></div>
+            </article>
+            <article class="showcase-slide" data-slide="4" aria-hidden="true" inert>
+              <div class="showcase-image media-slot"><div class="slot-inner"><span class="slot-icon">↗</span><strong>Statistics & History</strong><small>assets/screenshots/statistics.png</small></div><img src="assets/screenshots/statistics.png" alt="Scorpion Defense statistics & history screenshot" loading="lazy" onerror="this.remove()"></div>
+              <div class="showcase-description"><span class="slide-label">Statistics & History</span><h3>Review performance</h3><p>Look back at completed sessions and results.</p></div>
+            </article>
+            <article class="showcase-slide" data-slide="5" aria-hidden="true" inert>
+              <div class="showcase-image media-slot"><div class="slot-inner"><span class="slot-icon">☼</span><strong>Calibration</strong><small>assets/screenshots/calibration.png</small></div><img src="assets/screenshots/calibration.png" alt="Scorpion Defense calibration screenshot" loading="lazy" onerror="this.remove()"></div>
+              <div class="showcase-description"><span class="slide-label">Calibration</span><h3>Fine-tune detection</h3><p>Adjust for your training environment.</p></div>
+            </article>
+          </div>
+          <div class="slideshow-controls">
+            <button type="button" id="slide-prev" class="slide-arrow" aria-label="Previous slide: Calibration"><span aria-hidden="true">←</span><span class="arrow-copy"><small>PREVIOUS</small><strong id="prev-slide-name">Calibration</strong></span></button>
+            <div class="slide-indicators" id="slide-indicators" aria-label="Choose app screenshot">
+              <button type="button" class="slide-dot is-active" data-goto="0" aria-label="Go to slide 1: Dashboard" aria-current="true"></button>
+              <button type="button" class="slide-dot" data-goto="1" aria-label="Go to slide 2: Live Session" aria-current="false"></button>
+              <button type="button" class="slide-dot" data-goto="2" aria-label="Go to slide 3: Interactive Mode" aria-current="false"></button>
+              <button type="button" class="slide-dot" data-goto="3" aria-label="Go to slide 4: Connected Devices" aria-current="false"></button>
+              <button type="button" class="slide-dot" data-goto="4" aria-label="Go to slide 5: Statistics & History" aria-current="false"></button>
+              <button type="button" class="slide-dot" data-goto="5" aria-label="Go to slide 6: Calibration" aria-current="false"></button>
+            </div>
+            <button type="button" id="slide-next" class="slide-arrow slide-arrow-next" aria-label="Next slide: Live Session"><span class="arrow-copy"><small>NEXT</small><strong id="next-slide-name">Live Session</strong></span><span aria-hidden="true">→</span></button>
+          </div>
+          <div class="slide-progress" aria-hidden="true"><div id="slide-progress-fill"></div></div>
+          <p class="slideshow-hint">Automatically changes every 5 seconds · Use the arrows to browse</p>
         </div>
       </div>
     </section>
@@ -246,6 +310,76 @@
       iframe.allowFullscreen = true;
       videoBox.appendChild(iframe);
     }
+
+
+    // Screenshots rotate every five seconds. Manual navigation restarts the timer.
+    (() => {
+      const carousel = document.getElementById('app-slideshow');
+      if (!carousel) return;
+      const slides = [...carousel.querySelectorAll('.showcase-slide')];
+      const dots = [...carousel.querySelectorAll('.slide-dot')];
+      const names = ['Dashboard', 'Live Session', 'Interactive Mode', 'Connected Devices', 'Statistics & History', 'Calibration'];
+      const duration = 5000;
+      let current = 0;
+      let timer = null;
+      let progressStart = 0;
+      let progressFrame = null;
+      let paused = false;
+      const progress = document.getElementById('slide-progress-fill');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function paintProgress(now) {
+        progress.style.width = Math.min(100, ((now - progressStart) / duration) * 100) + '%';
+        if (!paused) progressFrame = requestAnimationFrame(paintProgress);
+      }
+      function stopClock() {
+        clearTimeout(timer);
+        if (progressFrame !== null) cancelAnimationFrame(progressFrame);
+      }
+      function restartClock() {
+        stopClock();
+        progress.style.width = '0%';
+        if (paused || reduceMotion || document.hidden) return;
+        progressStart = performance.now();
+        progressFrame = requestAnimationFrame(paintProgress);
+        timer = setTimeout(() => show(current + 1), duration);
+      }
+      function show(index) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          const active = i === current;
+          slide.classList.toggle('is-active', active);
+          slide.setAttribute('aria-hidden', String(!active));
+          slide.inert = !active;
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === current);
+          dot.setAttribute('aria-current', String(i === current));
+        });
+        const prev = (current - 1 + slides.length) % slides.length;
+        const next = (current + 1) % slides.length;
+        document.getElementById('prev-slide-name').textContent = names[prev];
+        document.getElementById('next-slide-name').textContent = names[next];
+        document.getElementById('slide-prev').setAttribute('aria-label', 'Previous slide: ' + names[prev]);
+        document.getElementById('slide-next').setAttribute('aria-label', 'Next slide: ' + names[next]);
+        document.getElementById('slide-count').textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+        restartClock();
+      }
+      document.getElementById('slide-prev').addEventListener('click', () => show(current - 1));
+      document.getElementById('slide-next').addEventListener('click', () => show(current + 1));
+      dots.forEach((dot, index) => dot.addEventListener('click', () => show(index)));
+      carousel.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          event.preventDefault();
+          show(current + (event.key === 'ArrowRight' ? 1 : -1));
+        }
+      });
+      carousel.addEventListener('mouseenter', () => { paused = true; stopClock(); });
+      carousel.addEventListener('mouseleave', () => { paused = false; restartClock(); });
+      carousel.addEventListener('focusin', () => { paused = true; stopClock(); });
+      carousel.addEventListener('focusout', event => { if (!carousel.contains(event.relatedTarget)) { paused = false; restartClock(); } });
+      document.addEventListener('visibilitychange', restartClock);
+      show(0);
+    })();
 
     document.getElementById('year').textContent = String(new Date().getFullYear());
     // Keep a fully functional fallback even if GitHub's API is unavailable.
