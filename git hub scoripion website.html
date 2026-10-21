@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070707" />
+  <meta name="description" content="Scorpion Defense — desktop control and real-time feedback for your connected laser training targets. Download for Windows." />
+  <title>Scorpion Defense | Connected Training</title>
+  <style>
+    :root {
+      --bg:#070707;--panel:#141414;--panel2:#1d1d1d;--edge:#393939;--ink:#f5f5f5;--muted:#a9a9a9;
+      --accent:#ff303d;--accent-deep:#d70b23;--violet:#ff6673;
+      --max:1120px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .top-glow{position:absolute;width:780px;height:620px;top:-220px;right:-190px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse,rgba(255,48,61,.13),rgba(130,5,25,.055) 45%,transparent 75%);filter:blur(10px)}
+    header{position:relative;z-index:2;border-bottom:1px solid rgba(255,255,255,.07)}
+    .nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:inline-flex;align-items:center;gap:13px;font-weight:850;letter-spacing:.075em;font-size:16px}
+    .mark{display:inline-grid;place-items:center;width:39px;height:39px;border:1px solid #8b2230;border-radius:12px;background:rgba(255,48,61,.095);color:var(--accent)}
+    .mark svg{width:23px;height:23px}
+    .navlinks{display:flex;align-items:center;gap:28px;color:var(--muted);font-size:13px;font-weight:650}
+    .navlinks a:hover,.footer-links a:hover{color:var(--accent)}
+    .nav-download{display:inline-flex;align-items:center;gap:9px;border:1px solid #7b2630;border-radius:100px;padding:10px 17px;color:var(--accent);white-space:nowrap;font-size:13px;font-weight:750}
+    .nav-download:hover{background:rgba(255,48,61,.08)}
+    .hero{position:relative;padding:105px 0 105px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:42px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 13px var(--accent)}
+    h1{font-size:clamp(45px,5.8vw,79px);line-height:1.03;letter-spacing:-.052em;margin:22px 0 22px;font-weight:850}
+    h1 .line{display:block}
+    h1 .colored{color:var(--accent)}
+    .lead{font-size:17px;line-height:1.8;color:#bfbfbf;max-width:505px;margin:0 0 30px}
+    .cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;border-radius:11px;padding:15px 22px;font-weight:800;font-size:14px;transition:transform .15s,background .15s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--accent);color:#100406;box-shadow:0 14px 44px rgba(255,48,61,.14)}
+    .btn-primary:hover{background:#ff5965}
+    .btn-ghost{color:#ededed;border:1px solid #454545;background:rgba(255,255,255,.025)}
+    .btn-ghost:hover{background:#242424}
+    .btn svg{width:18px;height:18px}
+    .release-hint{color:#969696;font-size:12px;margin-top:17px}
+    .release-hint span{color:#bbbbbb}
+    .radar-shell{position:relative;min-height:450px;border:1px solid rgba(255,80,90,.18);border-radius:26px;background:linear-gradient(152deg,#1c1013 0%,#141414 54%,#171417 100%);box-shadow:0 26px 80px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.035);overflow:hidden}
+    .radar-head{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:25px 27px 0;color:#f0c4c8;text-transform:uppercase;font-size:10px;font-weight:850;letter-spacing:.16em}
+    .radar-tag{color:#ff8c97;background:rgba(255,48,61,.09);padding:6px 9px;border:1px solid rgba(255,48,61,.19);border-radius:100px;font-size:9px;letter-spacing:.08em}
+    .rings{width:min(315px,75%);aspect-ratio:1;margin:10px auto 6px;position:relative;border-radius:50%;border:1px solid #563238;background:radial-gradient(circle at center,rgba(255,48,61,.09) 0 3%,transparent 4% 100%),repeating-radial-gradient(circle at center,transparent 0 51px,rgba(255,75,90,.17) 52px 53px,transparent 54px 78px);box-shadow:0 0 0 26px rgba(255,48,61,.018)}
+    .rings::before,.rings::after{content:"";position:absolute;background:rgba(255,95,105,.13)}
+    .rings::before{width:1px;height:100%;left:50%;top:0}
+    .rings::after{height:1px;width:100%;top:50%;left:0}
+    .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 10deg,rgba(255,48,61,.15),transparent 49deg,transparent 360deg);animation:spin 12s linear infinite}
+    .target-ping{position:absolute;z-index:1;display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:rgba(255,48,61,.12);border:1px solid var(--accent);color:var(--accent);font-size:10px;font-weight:850;box-shadow:0 0 24px rgba(255,48,61,.13)}
+    .ping1{left:22%;top:27%}.ping2{right:17%;top:40%}.ping3{left:47%;bottom:18%}
+    .radar-bottom{padding:0 25px 25px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .mini{border:1px solid #433034;border-radius:13px;padding:13px 10px;background:rgba(0,0,0,.12);text-align:center}
+    .mini b{display:block;color:#f6eded;font-size:17px;line-height:1.2;letter-spacing:-.02em}
+    .mini span{display:block;color:#b7999c;text-transform:uppercase;font-size:9px;letter-spacing:.1em;margin-top:6px}
+    .visual-disclaimer{text-align:center;font-size:10px;color:#999999;margin:10px 0 0}
+    section:not(.hero){padding:84px 0}
+    .section-top{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:28px}
+    h2{font-size:clamp(29px,3.5vw,43px);letter-spacing:-.036em;line-height:1.2;margin:14px 0 0}
+    .section-text{color:var(--muted);max-width:410px;font-size:14px;margin:0}
+    .grid-features{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .feature{min-height:186px;border:1px solid #383033;border-radius:18px;padding:24px;background:linear-gradient(135deg,#1e1719,#111111);transition:border-color .15s}
+    .feature:hover{border-color:#b43443}
+    .feature .symbol{display:grid;place-items:center;height:39px;width:39px;border-radius:11px;color:var(--accent);background:rgba(255,48,61,.08);margin-bottom:20px}
+    .feature svg{height:20px;width:20px}
+    .feature h3{margin:0 0 6px;font-size:16px;letter-spacing:-.015em}
+    .feature p{margin:0;color:#b9aeb0;font-size:13px;line-height:1.65}
+    #download{scroll-margin-top:40px}
+    .download-panel{border:1px solid #86313a;border-radius:25px;padding:40px;background:radial-gradient(circle at right top,rgba(255,48,61,.1),transparent 48%),linear-gradient(135deg,#211216,#101010);display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px}
+    .download-panel h2{margin:12px 0 10px}
+    .download-panel p{color:#c2b8b8;font-size:14px;margin:0;max-width:530px}
+    .dl-side{display:flex;flex-direction:column;align-items:stretch;gap:9px}
+    .dl-side .btn{width:100%}
+    .small-info{text-align:center;font-size:11px;color:#aaa}
+    .platforms{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
+    .platform-chip{font-size:11px;padding:5px 10px;border-radius:100px;border:1px solid #77323a;color:#ffc1c7}
+    .platform-chip.off{border-color:#444;color:#a0a0a0}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .step{border-top:1px solid #3a3435;padding-top:20px}
+    .step-number{display:inline-grid;place-items:center;width:30px;height:30px;border:1px solid #a02a39;border-radius:9px;color:var(--accent);font-size:12px;font-weight:800;margin-bottom:15px}
+    .step h3{font-size:17px;margin:0 0 8px}
+    .step p{font-size:13px;color:#b6aeb0;margin:0;line-height:1.7}
+    .note{margin-top:27px;border-left:2px solid #ff303d;padding:12px 17px;color:#b7b0b0;background:rgba(255,48,61,.025);font-size:12px;line-height:1.8}
+    .note strong{color:#f7e5e7}
+    footer{border-top:1px solid #393132;padding:32px 0 38px;color:#a89c9e;font-size:12px}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .footer-links{display:flex;gap:22px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.sweep{animation:none}.btn{transition:none}}
+    @media(max-width:900px){.hero{padding:76px 0}.hero-grid{grid-template-columns:1fr}.radar-shell{max-width:560px;width:100%;margin:auto}.section-top{align-items:start;flex-direction:column}.download-panel{grid-template-columns:1fr}.grid-features{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.wrap{width:calc(100% - 32px)}.nav{min-height:70px}.navlinks{gap:12px}.navlinks .hide-small{display:none}.nav-download{padding:8px 11px;font-size:11px}.brand{font-size:13px;gap:8px}.mark{height:33px;width:33px}.hero{padding:64px 0 65px}.lead{font-size:15px}.radar-shell{min-height:400px}.rings{width:260px}.radar-bottom{padding:0 15px 20px}.mini b{font-size:14px}.mini span{font-size:8px}.grid-features,.steps{grid-template-columns:1fr}.feature{min-height:unset}.download-panel{padding:26px 21px}section:not(.hero){padding:58px 0}.foot{align-items:start;flex-direction:column}}
+
+    /* ASSET PLACEHOLDERS: Upload images with these exact names to see them appear automatically. */
+    .media-slot{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 25% 20%,#3b151d 0,transparent 48%),linear-gradient(145deg,#241318,#0d0d0d);border:1px dashed #8f303d;display:flex;align-items:center;justify-content:center;text-align:center}
+    .media-slot::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,65,80,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,65,80,.035) 1px,transparent 1px);background-size:28px 28px;z-index:-1}
+    .media-slot img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+    .slot-inner{padding:24px;display:grid;place-items:center;gap:10px;position:relative;z-index:1}
+    .slot-icon{width:50px;height:50px;border-radius:16px;background:#ff303d16;color:var(--accent);border:1px solid #ff303d44;display:grid;place-items:center;font-size:25px}
+    .slot-inner strong{font-size:15px;color:#ffe6e8}
+    .slot-inner small{color:#bda4a6;font-size:11px;line-height:1.6;max-width:260px}
+    .hero-photo{min-height:445px;border-radius:24px;box-shadow:0 24px 70px #0005}
+    .hero-photo .slot-inner strong{font-size:21px}
+    .hero-photo-tag{position:absolute;bottom:16px;left:16px;z-index:3;background:#160b0ddc;border:1px solid #a22a37;border-radius:40px;padding:8px 13px;font-size:11px;color:#ffe3e6}
+    .media-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:17px}
+    .media-card,.screen-card{background:#181315;border:1px solid #423238;border-radius:17px;overflow:hidden}
+    .media-card .media-slot{min-height:230px;border:0;border-bottom:1px solid #443237}
+    .media-caption{padding:16px 17px 19px}
+    .media-caption h3{margin:0 0 5px;font-size:16px}
+    .media-caption p{margin:0;color:#b8a8ab;font-size:12px;line-height:1.65}
+    .video-frame{max-width:930px;margin:0 auto;aspect-ratio:16/9;border-radius:22px}
+    .video-frame iframe{border:0;position:absolute;inset:0;width:100%;height:100%;z-index:4}
+    .video-note{text-align:center;color:#aea1a4;font-size:12px;margin:16px 0 0}
+    .screen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .screen-card .media-slot{aspect-ratio:16/10;border:0;border-bottom:1px solid #443237}
+    #hardware,#demo,#app{scroll-margin-top:84px}
+    @media(max-width:900px){.media-grid{grid-template-columns:1fr 1fr}.screen-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.media-grid,.screen-grid{grid-template-columns:1fr}.hero-photo{min-height:320px}.media-card .media-slot{min-height:225px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Scorpion Defense home">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.3"/><circle cx="12" cy="12" r="3.8"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg></span>
+        <span>SCORPION DEFENSE</span>
+      </a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#hardware" class="hide-small">Hardware</a><a href="#demo" class="hide-small">Demo</a><a href="#app" class="hide-small">App</a>
+        <a href="#how-it-works" class="hide-small">Setup</a>
+        <a class="nav-download" href="#download">Get the app <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="top-glow" aria-hidden="true"></div>
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Connected laser target training</span>
+          <h1><span class="line">FOCUS.</span><span class="line">REACT.</span><span class="line colored">IMPROVE.</span></h1>
+          <p class="lead">Control your Scorpion Defense targets, run interactive training modes, and see session feedback in one connected desktop experience.</p>
+          <div class="cta-row">
+            <a id="hero-download" class="btn btn-primary" href="https://github.com/Chomoso/Scorpion-defense/releases/latest" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3"/></svg>Download for Windows</a>
+            <a class="btn btn-ghost" href="#demo">Watch the demo <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="release-hint"><span>Windows desktop</span> · Version 1.0.0 · No Flutter or VS Code required</div>
+        </div>
+        <div>
+          <div class="media-slot hero-photo">
+            <div class="slot-inner"><span class="slot-icon">◎</span><strong>Your product. Front and center.</strong><small>Hero image placeholder · assets/images/product-hero.jpg<br>Upload the photo later and it appears here automatically.</small></div>
+            <img src="assets/images/product-hero.jpg" alt="Scorpion Defense connected training target system" onerror="this.remove()" loading="eager">
+            <span class="hero-photo-tag">CONNECTED TRAINING SYSTEM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hardware">
+      <div class="wrap">
+        <div class="section-top"><div><span class="eyebrow">The hardware</span><h2>Meet the system.</h2></div><p class="section-text">Wireless-connected targets built for responsive, repeatable laser training. See the hardware from every angle.</p></div>
+        <div class="media-grid">
+          <article class="media-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">▣</span><strong>Full target setup</strong><small>assets/images/full-setup.jpg</small></div><img src="assets/images/full-setup.jpg" alt="Full Scorpion Defense target setup" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Set up and train</h3><p>See how the master and remote targets work together.</p></div></article>
+          <article class="media-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◎</span><strong>Target close-up</strong><small>assets/images/target-closeup.jpg</small></div><img src="assets/images/target-closeup.jpg" alt="Close-up of a Scorpion Defense target" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Responsive targets</h3><p>Light feedback and detection in a compact target design.</p></div></article>
+          <article class="media-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◈</span><strong>Training in action</strong><small>assets/images/in-action.jpg</small></div><img src="assets/images/in-action.jpg" alt="Scorpion Defense training session in progress" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>See it in action</h3><p>Show how the targets respond during a session.</p></div></article>
+        </div>
+      </div>
+    </section>
+    <section id="demo">
+      <div class="wrap">
+        <div class="section-top"><div><span class="eyebrow">Product walkthrough</span><h2>See Scorpion Defense in action.</h2></div><p class="section-text">A quick demonstration of the targets, the desktop control app, and the training experience.</p></div>
+        <!-- VIDEO: Replace VIDEO_ID_HERE below with a YouTube video ID when ready. -->
+        <div class="media-slot video-frame" id="video-container" data-youtube-id="VIDEO_ID_HERE">
+          <div class="slot-inner"><span class="slot-icon">▶</span><strong>Product demo coming soon</strong><small>Your walkthrough video will play here.<br>Replace VIDEO_ID_HERE in index.html with your YouTube video ID.</small></div>
+        </div>
+        <p class="video-note">Show the setup, a live round, the app controls, and the session results.</p>
+      </div>
+    </section>
+    <section id="app">
+      <div class="wrap">
+        <div class="section-top"><div><span class="eyebrow">The control app</span><h2>The intelligence behind every session.</h2></div><p class="section-text">More than a hit counter: game modes, live feedback, device management, and calibration in one place.</p></div>
+        <div class="screen-grid">
+          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">▦</span><strong>Dashboard</strong><small>assets/screenshots/dashboard.png</small></div><img src="assets/screenshots/dashboard.png" alt="Scorpion Defense app dashboard screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Your command center</h3><p>Start a session and see your system at a glance.</p></div></article>
+          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◷</span><strong>Live session</strong><small>assets/screenshots/live-session.png</small></div><img src="assets/screenshots/live-session.png" alt="Live session statistics screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Live feedback</h3><p>Keep an eye on shots, hits, and session timing.</p></div></article>
+          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◎</span><strong>Interactive mode</strong><small>assets/screenshots/interactive.png</small></div><img src="assets/screenshots/interactive.png" alt="Interactive training mode screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Choose your challenge</h3><p>Configure interactive drills with connected targets.</p></div></article>
+          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">⌁</span><strong>Devices</strong><small>assets/screenshots/devices.png</small></div><img src="assets/screenshots/devices.png" alt="Connected devices management screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Manage your targets</h3><p>See connected targets and their status.</p></div></article>
+          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">↗</span><strong>Session stats</strong><small>assets/screenshots/statistics.png</small></div><img src="assets/screenshots/statistics.png" alt="Training statistics screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Review performance</h3><p>Look back at completed sessions and results.</p></div></article>
+          <article class="screen-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">☼</span><strong>Calibration</strong><small>assets/screenshots/calibration.png</small></div><img src="assets/screenshots/calibration.png" alt="Target calibration controls screenshot" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Fine-tune detection</h3><p>Adjust for your training environment.</p></div></article>
+        </div>
+      </div>
+    </section>
+    <section id="features">
+      <div class="wrap">
+        <div class="section-top"><div><span class="eyebrow">Built around your training</span><h2>Everything in one control center.</h2></div><p class="section-text">Connect to your target system, adjust how it responds, and follow your performance without jumping between tools.</p></div>
+        <div class="grid-features">
+          <article class="feature"><div class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 5 11 7-11 7V5Z"/></svg></div><h3>Training modes</h3><p>Choose Freeplay or interactive sessions and control training from your computer.</p></article>
+          <article class="feature"><div class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V8m5 10V4m5 14v-7m5 7V6"/></svg></div><h3>Live session data</h3><p>Track shots, hits, and session timing as your session progresses.</p></article>
+          <article class="feature"><div class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></svg></div><h3>Connected targets</h3><p>Communicate with the ESP32 master and monitor your target network.</p></article>
+          <article class="feature"><div class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="#141414"/><circle cx="16" cy="17" r="3" fill="#141414"/></svg></div><h3>Sensitivity controls</h3><p>Adjust light-detection sensitivity to suit different training environments.</p></article>
+          <article class="feature"><div class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4m0 10v4M3 12h4m10 0h4"/><circle cx="12" cy="12" r="4"/></svg></div><h3>Target calibration</h3><p>Manage target calibration and tune detection to your room's lighting.</p></article>
+          <article class="feature"><div class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10l5 4 5-8 6 4v10"/><path d="M3 20h18"/></svg></div><h3>Performance insights</h3><p>Review session results and track your training through the app.</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="download">
+      <div class="wrap">
+        <div class="download-panel">
+          <div><span class="eyebrow">Get started</span><h2>Ready to train?</h2><p>Install Scorpion Defense on your Windows computer and connect it to your compatible Scorpion Defense target system.</p><div class="platforms"><span class="platform-chip">Windows · Available</span><span class="platform-chip off">Mac · Not yet available</span><span class="platform-chip off">iPhone · Not yet available</span></div></div>
+          <div class="dl-side">
+            <a id="main-download" class="btn btn-primary" href="https://github.com/Chomoso/Scorpion-defense/releases/latest" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3"/></svg><span>Download for Windows</span></a>
+            <a class="small-info" href="https://github.com/Chomoso/Scorpion-defense/releases" target="_blank" rel="noopener noreferrer">View all versions on GitHub ↗</a>
+            <div id="download-status" class="small-info" role="status" aria-live="polite">Windows installer · v1.0.0</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="how-it-works">
+      <div class="wrap">
+        <div class="section-top"><div><span class="eyebrow">Simple setup</span><h2>From download to first session.</h2></div><p class="section-text">No development tools needed. You'll just need the installer, your target hardware, and a compatible Windows PC.</p></div>
+        <div class="steps">
+          <div class="step"><span class="step-number">01</span><h3>Download</h3><p>Click Download for Windows to get the latest Scorpion Defense installer from the official GitHub release.</p></div>
+          <div class="step"><span class="step-number">02</span><h3>Install</h3><p>Run <strong>ScorpionDefenseSetup.exe</strong> and follow the on-screen instructions. Launch Scorpion Defense when installation is complete.</p></div>
+          <div class="step"><span class="step-number">03</span><h3>Connect &amp; train</h3><p>Turn on your compatible Scorpion Defense targets, connect to the master through the app, and select a training mode.</p></div>
+        </div>
+        <div class="note"><strong>Before installing:</strong> Scorpion Defense requires its companion target hardware. This is an early Windows release. Because the installer may not yet be code-signed, Windows may display a publisher or SmartScreen warning. Verify that you obtained the installer from the official GitHub release. Test on additional PCs before a wide public rollout.</div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap foot"><span>© <span id="year">2026</span> Scorpion Defense. Built for connected target training.</span><div class="footer-links"><a href="https://github.com/Chomoso/Scorpion-defense/releases" target="_blank" rel="noopener noreferrer">Releases ↗</a><a href="https://github.com/Chomoso/Scorpion-defense" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></footer>
+  <script>
+    const videoBox = document.getElementById("video-container");
+    const videoId = videoBox?.dataset.youtubeId;
+    if (videoBox && videoId && videoId !== "VIDEO_ID_HERE" && /^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube-nocookie.com/embed/" + videoId;
+      iframe.title = "Scorpion Defense demo video";
+      iframe.loading = "lazy";
+      iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      videoBox.appendChild(iframe);
+    }
+
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+    // Keep a fully functional fallback even if GitHub's API is unavailable.
+    // GitHub Releases provides the installer; GitHub Pages only hosts this website.
+    const repository = 'Chomoso/Scorpion-defense';
+    fetch('https://api.github.com/repos/' + repository + '/releases/latest', {headers:{Accept:'application/vnd.github+json'}})
+      .then(response => {if (!response.ok) throw new Error('Release details unavailable');return response.json()})
+      .then(release => {
+        if (!release || !Array.isArray(release.assets)) return;
+        const exeAssets = release.assets.filter(asset => typeof asset.name === 'string' && asset.name.toLowerCase().endsWith('.exe') && typeof asset.browser_download_url === 'string');
+        const exact = exeAssets.find(asset => asset.name.toLowerCase() === 'scorpiondefensesetup.exe');
+        const installer = exact || exeAssets.find(asset => /setup|install/i.test(asset.name)) || (exeAssets.length === 1 ? exeAssets[0] : null);
+        const status = document.getElementById('download-status');
+        if (installer) {
+          for (const id of ['hero-download', 'main-download']) {
+            const button = document.getElementById(id);
+            button.href = installer.browser_download_url;
+          }
+          status.textContent = (release.tag_name || 'Latest release') + ' · Direct installer download';
+        } else {
+          status.textContent = 'Open the GitHub release to select the installer';
+        }
+      }).catch(() => {
+        document.getElementById('download-status').textContent = 'Installer available from the GitHub Releases page';
+      });
+  </script>
+</body>
+</html>
