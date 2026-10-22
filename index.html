@@ -115,6 +115,9 @@
     .media-caption{padding:16px 17px 19px}
     .media-caption h3{margin:0 0 5px;font-size:16px}
     .media-caption p{margin:0;color:#b8a8ab;font-size:12px;line-height:1.65}
+    .gun-features{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .gun-feature{display:inline-flex;align-items:center;gap:6px;background:#33161c;border:1px solid #923340;color:#ffd5da;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:750}
+    .gun-feature::before{content:"•";font-size:15px;color:#ff303d;line-height:0}
     .video-frame{max-width:930px;margin:0 auto;aspect-ratio:16/9;border-radius:22px}
     .video-frame iframe{border:0;position:absolute;inset:0;width:100%;height:100%;z-index:4}
     .video-note{text-align:center;color:#aea1a4;font-size:12px;margin:16px 0 0}
@@ -184,8 +187,8 @@
         </div>
         <div>
           <div class="media-slot hero-photo">
-            <div class="slot-inner"><span class="slot-icon">◎</span><strong>Your product. Front and center.</strong><small>Hero image placeholder · assets/images/product-hero.jpg<br>Upload the photo later and it appears here automatically.</small></div>
-            <img src="assets/images/product-hero.jpg" alt="Scorpion Defense connected training target system" onerror="this.remove()" loading="eager">
+            <div class="slot-inner"><span class="slot-icon">◎</span><strong>The complete Scorpion Defense system</strong><small>Hero photo placeholder · assets/images/product-hero.jpg<br>Show the gun and all targets together.</small></div>
+            <img src="assets/images/product-hero.jpg" alt="Complete Scorpion Defense kit with training gun and connected targets" onerror="this.remove()" loading="eager">
             <span class="hero-photo-tag">CONNECTED TRAINING SYSTEM</span>
           </div>
         </div>
@@ -194,11 +197,29 @@
 
     <section id="hardware">
       <div class="wrap">
-        <div class="section-top"><div><span class="eyebrow">The hardware</span><h2>Meet the system.</h2></div><p class="section-text">Wireless-connected targets built for responsive, repeatable laser training. See the hardware from every angle.</p></div>
+        <div class="section-top"><div><span class="eyebrow">The hardware</span><h2>Meet the system.</h2></div><p class="section-text">Explore the complete kit, connected target network, individual target design, and the haptic-feedback training gun.</p></div>
         <div class="media-grid">
-          <article class="media-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">▣</span><strong>Full target setup</strong><small>assets/images/full-setup.jpg</small></div><img src="assets/images/full-setup.jpg" alt="Full Scorpion Defense target setup" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Set up and train</h3><p>See how the master and remote targets work together.</p></div></article>
-          <article class="media-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◎</span><strong>Target close-up</strong><small>assets/images/target-closeup.jpg</small></div><img src="assets/images/target-closeup.jpg" alt="Close-up of a Scorpion Defense target" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>Responsive targets</h3><p>Light feedback and detection in a compact target design.</p></div></article>
-          <article class="media-card"><div class="media-slot"><div class="slot-inner"><span class="slot-icon">◈</span><strong>Training in action</strong><small>assets/images/in-action.jpg</small></div><img src="assets/images/in-action.jpg" alt="Scorpion Defense training session in progress" loading="lazy" onerror="this.remove()"></div><div class="media-caption"><h3>See it in action</h3><p>Show how the targets respond during a session.</p></div></article>
+          <article class="media-card">
+            <div class="media-slot">
+              <div class="slot-inner"><span class="slot-icon">◎</span><strong>Multiple connected targets</strong><small>assets/images/connected-targets.jpg</small></div>
+              <img src="assets/images/connected-targets.jpg" alt="Multiple illuminated Scorpion Defense targets connected for training" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="media-caption"><h3>One connected target system</h3><p>Bring multiple wireless targets together for dynamic training drills, with centralized control through the app.</p></div>
+          </article>
+          <article class="media-card">
+            <div class="media-slot">
+              <div class="slot-inner"><span class="slot-icon">◉</span><strong>Target close-up</strong><small>assets/images/target-closeup.jpg</small></div>
+              <img src="assets/images/target-closeup.jpg" alt="Close-up of the Scorpion Defense target showing its sensor and lighting" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="media-caption"><h3>Instant target feedback</h3><p>Light-based hit detection and LED responses make every target part of the training experience.</p></div>
+          </article>
+          <article class="media-card">
+            <div class="media-slot">
+              <div class="slot-inner"><span class="slot-icon">⌁</span><strong>Training gun close-up</strong><small>assets/images/gun-closeup.jpg</small></div>
+              <img src="assets/images/gun-closeup.jpg" alt="Scorpion Defense training gun with haptic shot feedback and a magazine reload button" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="media-caption"><h3>Feel every shot.</h3><p>The training gun vibrates with each shot for haptic feedback. Its dedicated magazine reload button lets you simulate reloading during a session.</p><div class="gun-features"><span class="gun-feature">Haptic feedback per shot</span><span class="gun-feature">Magazine reload button</span></div></div>
+          </article>
         </div>
       </div>
     </section>
